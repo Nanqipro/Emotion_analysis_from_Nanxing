@@ -3,8 +3,8 @@ from tensorflow.python.keras.models import load_model
 from sklearn.preprocessing import LabelEncoder,OneHotEncoder
 from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.layers import  Dense, Dropout, Input, Embedding,SimpleRNN
-from tensorflow.python.keras.preprocessing.text import Tokenizer
-from tensorflow.python.keras.preprocessing import sequence
+# from tensorflow.python.keras.preprocessing.text import Tokenizer
+# from tensorflow.python.keras.preprocessing import sequence
 from jieba import lcut
 from sklearn.model_selection import train_test_split
 import numpy as np
@@ -12,6 +12,8 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_score, accuracy_score, f1_score, recall_score
 from tensorflow.python.keras.callbacks import TensorBoard,EarlyStopping
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing import sequence
 
 # 数据处理
 def is_chinese(uchar):
@@ -108,7 +110,7 @@ model.summary()
 model.compile(loss="categorical_crossentropy",optimizer="RMSprop",metrics=["accuracy"])
 
 # # 模型训练
-model_fit = model.fit(train_seq_mat,train_y,batch_size=128,epochs=10,
+model_fit = model.fit(train_seq_mat,train_y,batch_size=128,epochs=2,
                       validation_data=(val_seq_mat,val_y),
                       callbacks=[TensorBoard(log_dir='./log')] ## 当val-loss不再提升时停止训练
                      )

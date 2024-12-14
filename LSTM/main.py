@@ -28,7 +28,7 @@ embedding_pretrained = \
 embed = embedding_pretrained.size(1)        # 词向量维度
 dropout = 0.5                               # 随机丢弃
 num_classes = 2                             # 类别数
-num_epochs = 30                            # epoch数
+num_epochs = 200                             # epoch数
 batch_size = 128                            # mini-batch大小
 pad_size = 50                               # 每句话处理成的长度(短填长切)
 learning_rate = 1e-3                        # 学习率
@@ -236,7 +236,9 @@ def train( model, dataloaders):
     plot_acc(plot_train_acc)
     plot_loss(plot_train_loss)
     # 3，验证循环----------------------------------------------------------------
-    model.load_state_dict(torch.load(save_path))
+    # model.load_state_dict(torch.load(save_path))
+    model.load_state_dict(torch.load(save_path, weights_only=True))
+
     model.eval()
     start_time = time.time()
     test_acc, test_loss = dev_eval(model, dataloaders['test'], loss_function,Result_test=True)

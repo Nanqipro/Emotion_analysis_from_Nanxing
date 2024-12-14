@@ -256,8 +256,8 @@ def main_WINDOW():
 
 if __name__ == '__main__':
     read_data()
-    # word2vec_()
-    # classification_()
+    word2vec_()
+    classification_()
     #
 
     # sg.theme()
